@@ -25,6 +25,10 @@ app.get('/',(req,res) =>{
 app.get('/users',(req,res) =>{
     res.json(data.users)
 })
+//Display all posts
+app.get('/posts',(req,res) =>{
+    res.json(data.posts)
+})
 //Add a new user
 app.post('/users', (req,res) => {
     const {firstname, lastname, email, password} = req.body
@@ -40,15 +44,15 @@ app.post('/users', (req,res) => {
     res.json(data.users)
 })
 
-//Display a single user
+//Display a single post
 app.get('/posts/:id',(req,res) =>{
     const found = data.posts.some(post => 
     post.id === Number(req.params.id))
     if(found){
-     res.send(data.posts[req.params.id])//use this for project
+    // res.send(data.posts[req.params.id])use this for project
     //  Other way of doing the same
-    //  const post = data.posts.filter(post => post.id === Number(req.params.id))
-    //  res.send(post[0])
+     const post = data.posts.filter(post => post.id === Number(req.params.id))
+     res.send(post[0])
     }else{
         res.send('Post not found')
     }
